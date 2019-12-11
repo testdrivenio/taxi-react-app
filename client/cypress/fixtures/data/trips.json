@@ -1,0 +1,32 @@
+[
+  {
+    "id": "f0a132af-97d1-4b50-ba2a-0bff0b4a32ed",
+    "created": "2019-06-01 00:00:00",
+    "updated": "2019-06-01 00:00:00",
+    "pick_up_address": "6969 Fifth St",
+    "drop_off_address": "2846 Central St",
+    "status": "COMPLETED",
+    "rider_id": 2,
+    "driver_id": 1
+  },
+  {
+    "id": "676cb20b-d51d-44b5-951a-3e3c72a42668",
+    "created": "2019-06-02 00:00:00",
+    "updated": "2019-06-02 00:00:00",
+    "pick_up_address": "231 Oak Ridge Ln",
+    "drop_off_address": "8746 Spring Hill Rd",
+    "status": "STARTED",
+    "rider_id": 2,
+    "driver_id": 1
+  },
+  {
+    "id": "987a8e30-ca2f-4019-bbd9-1c7441e2ab1d",
+    "created": "2019-06-03 00:00:00",
+    "updated": "2019-06-03 00:00:00",
+    "pick_up_address": "8061 College St",
+    "drop_off_address": "2782 E Pecan St",
+    "status": "REQUESTED",
+    "rider_id": 2,
+    "driver_id": 1
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "username": "gary.cole@example.com",
+    "password": "pbkdf2_sha256$150000$lJiPYPRKVs40$FqDXgCz8XJQMpC0FhADRS5faWuCtdoxgBhdkmzNr558=",
+    "first_name": "Gary",
+    "last_name": "Cole",
+    "email": "gary.cole@example.com",
+    "date_joined": "2019-12-31T00:00:00.000Z",
+    "is_staff": false,
+    "is_superuser": false,
+    "is_active": true
+  },
+  {
+    "id": 2,
+    "username": "hugh.wells@example.com",
+    "password": "pbkdf2_sha256$150000$lJiPYPRKVs40$FqDXgCz8XJQMpC0FhADRS5faWuCtdoxgBhdkmzNr558=",
+    "first_name": "Hugh",
+    "last_name": "Wells",
+    "email": "hugh.wells@example.com",
+    "date_joined": "2019-12-31T00:00:00.000Z",
+    "is_staff": false,
+    "is_superuser": false,
+    "is_active": true
+  }
+]

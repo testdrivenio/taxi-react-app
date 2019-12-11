@@ -14,6 +14,10 @@ const logIn = () => {
 };
 
 describe('Authentication', function () {
+  before(function () {
+    cy.task('tableTruncate', { table: 'trips_user' });
+  });
+
   it('Can sign up.', function () {
     cy.server();
     cy.route('POST', '**/api/sign_up/**').as('signUp');
