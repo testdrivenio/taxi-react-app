@@ -55,41 +55,43 @@ function App () {
         </Navbar.Collapse>
       </Navbar>
       <Container className='pt-3'>
-        <Route exact path='/' render={() => (
-          <div className='middle-center'>
-            <h1 className='landing logo'>Taxi</h1>
-            {
-              !isLoggedIn &&
-              <Link
-                id='signUp'
-                className='btn btn-primary'
-                to='/sign-up'
-              >Sign up</Link>
-            }
-            {
-              !isLoggedIn &&
-              <Link
-                id='logIn'
-                className='btn btn-primary'
-                to='/log-in'
-              >Log in</Link>
-            }
-          </div>
-        )} />
-        <Route path='/sign-up' render={() => (
-          isLoggedIn ? (
-            <Redirect to='/' />
-          ) : (
-            <SignUp />
-          )
-        )} />
-        <Route path='/log-in' render={() => (
-          isLoggedIn ? (
-            <Redirect to='/' />
-          ) : (
-            <LogIn logIn={logIn} />
-          )
-        )} />
+        <Switch>
+          <Route exact path='/' render={() => (
+            <div className='middle-center'>
+              <h1 className='landing logo'>Taxi</h1>
+              {
+                !isLoggedIn &&
+                <Link
+                  id='signUp'
+                  className='btn btn-primary'
+                  to='/sign-up'
+                >Sign up</Link>
+              }
+              {
+                !isLoggedIn &&
+                <Link
+                  id='logIn'
+                  className='btn btn-primary'
+                  to='/log-in'
+                >Log in</Link>
+              }
+            </div>
+          )} />
+          <Route path='/sign-up' render={() => (
+            isLoggedIn ? (
+              <Redirect to='/' />
+            ) : (
+              <SignUp />
+            )
+          )} />
+          <Route path='/log-in' render={() => (
+            isLoggedIn ? (
+              <Redirect to='/' />
+            ) : (
+              <LogIn logIn={logIn} />
+            )
+          )} />
+        </Switch>
       </Container>
     </div>
   );
