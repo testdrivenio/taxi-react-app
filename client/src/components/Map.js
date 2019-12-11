@@ -23,7 +23,7 @@ function Map (props) {
 
   return (
     <LoadScript
-      googleMapsApiKey='AIzaSyAsiyKd9SF7KYLC8m35hi36ZyQKhHQXxA0'
+      googleMapsApiKey='<YOUR_API_KEY>'
     >
       <GoogleMap
         center={{
