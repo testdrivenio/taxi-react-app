@@ -16,7 +16,7 @@ function Map (props) {
   );
 
   const directionsCallback = (response) => {
-    if (response !== null && response.status == 'OK') {
+    if (response !== null && response.status === 'OK') {
       setResponse(response);
     }
   };
