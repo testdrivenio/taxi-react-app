@@ -1,0 +1,9 @@
+__pycache__/
+*.log
+db.sqlite3
+.env
+.envrc
+env
+venv
+.pytest_cache/
+.DS_Store
