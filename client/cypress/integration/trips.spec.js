@@ -16,8 +16,7 @@ describe('Trips', function () {
   })
 
   it('Can receive trip status updates', function () {
-    cy.server();
-    cy.route('GET', '**/api/trip/').as('getTrips');
+    cy.intercept('trip').as('getTrips');
 
     cy.logIn(riderEmail);
     cy.visit('/#/rider/request');
@@ -46,4 +45,4 @@ describe('Trips', function () {
       .eq(0)
       .contains('STARTED');
   });
-})
+});

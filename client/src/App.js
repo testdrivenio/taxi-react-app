@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
+import {
+  Button, Container, Form, Nav, Navbar
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -18,6 +20,7 @@ function App () {
   const [isLoggedIn, setLoggedIn] = useState(() => {
     return window.localStorage.getItem('taxi.auth') !== null;
   });
+
   const logIn = async (username, password) => {
     const url = `${process.env.REACT_APP_BASE_URL}/api/log_in/`;
     try {
@@ -33,6 +36,7 @@ function App () {
       return { response: error, isError: true };
     }
   };
+
   const logOut = () => {
     window.localStorage.removeItem('taxi.auth');
     setLoggedIn(false);

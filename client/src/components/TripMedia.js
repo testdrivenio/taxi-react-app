@@ -4,6 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 function TripMedia ({ trip, group, otherGroup }) {
   const user = trip[otherGroup];
+  const photoUrl = new URL(user.photo, process.env.REACT_APP_BASE_URL).href;
   const href = group ? `/${group}/${trip.id}` : undefined;
 
   return (
@@ -11,7 +12,7 @@ function TripMedia ({ trip, group, otherGroup }) {
       <img
         alt={user}
         className='mr-3 rounded-circle'
-        src={user.photo}
+        src={photoUrl}
         width={80}
         height={80}
       />

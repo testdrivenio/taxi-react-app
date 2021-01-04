@@ -5,10 +5,10 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-function LogIn (props) {
+function LogIn ({ logIn }) {
   const onSubmit = async (values, actions) => {
     try {
-      const { response, isError } = await props.logIn(
+      const { response, isError } = await logIn(
         values.username,
         values.password
       );
@@ -39,7 +39,7 @@ function LogIn (props) {
                 username: '',
                 password: ''
               }}
-              onSubmit={onSubmit}
+              onSubmit={onSubmit} 
             >
               {({
                 errors,

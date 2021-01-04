@@ -1,5 +1,4 @@
 const faker = require('faker');
-import { webSocket } from 'rxjs/webSocket';
 
 const driverEmail = faker.internet.email();
 const driverFirstName = faker.name.firstName();
@@ -41,7 +40,7 @@ const tripResponse = [
       photo: "http://localhost:8003/media/photos/photo_r3XrvgH.jpg",
     }
   }
-]
+];
 
 describe('The rider dashboard', function () {
   before(function() {
@@ -50,106 +49,94 @@ describe('The rider dashboard', function () {
   })
 
   it('Cannot be visited if the user is not a rider', function () {
-    cy.server();
-    cy.route('POST', '**/api/log_in/').as('logIn');
+    cy.intercept('POST', 'log_in').as('logIn');
 
     cy.logIn(driverEmail);
 
     cy.visit('/#/rider');
     cy.hash().should('eq', '#/');
-  })
+  });
 
   it('Can be visited if the user is a rider', function () {
-    cy.server();
-    cy.route('POST', '**/api/log_in/').as('logIn');
+    cy.intercept('POST', 'log_in').as('logIn');
 
     cy.logIn(riderEmail);
 
     cy.visit('/#/rider');
     cy.hash().should('eq', '#/rider');
-  })
+  });
 
   it('Displays messages for no trips', function () {
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '**/api/trip/',
-      status: 200,
-      response: []
+    cy.intercept('trip', {
+      statusCode: 200,
+      body: []
     }).as('getTrips');
-
+  
     cy.logIn(riderEmail);
-
+  
     cy.visit('/#/rider');
     cy.wait('@getTrips');
-
+  
     // Current trips.
     cy.get('[data-cy=trip-card]')
       .eq(0)
       .contains('No trips.');
-
+  
     // Completed trips.
     cy.get('[data-cy=trip-card]')
       .eq(1)
       .contains('No trips.');
-  })
+  });
 
-  it('Displays current, requested, and completed trips', function () {
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '**/api/trip/',
-      status: 200,
-      response: tripResponse
+  it('Displays current and completed trips', function () {
+    cy.intercept('trip', {
+      statusCode: 200,
+      body: tripResponse
     }).as('getTrips');
-
+  
     cy.logIn(riderEmail);
-
+  
     cy.visit('/#/rider');
     cy.wait('@getTrips');
-
+  
     // Current trips.
     cy.get('[data-cy=trip-card]')
       .eq(0)
       .contains('STARTED');
-
+  
     // Completed trips.
     cy.get('[data-cy=trip-card]')
       .eq(1)
       .contains('COMPLETED');
-  })
+  });
 
   it('Shows details about a trip', () => {
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '**/api/trip/**',
-      status: 200,
-      response: tripResponse[0]
+    cy.intercept('trip', {
+      statusCode: 200,
+      body: tripResponse[0]
     }).as('getTrips');
-
+  
     cy.logIn(riderEmail);
-
+  
     cy.visit(`/#/rider/${tripResponse[0].id}`);
-
+  
     cy.get('[data-cy=trip-card]')
       .should('have.length', 1)
       .and('contain.text', 'STARTED');
-  })
+  });
 
   it('Can request a new trip', function () {
-    cy.server();
-    cy.route('GET', '**/api/trip/').as('getTrips');
-
+    cy.intercept('trip').as('getTrips');
+  
     cy.logIn(riderEmail);
-
+  
     cy.visit('/#/rider/request');
-
+  
     cy.get('[data-cy=pick-up-address]').type('123 Main Street');
     cy.get('[data-cy=drop-off-address]').type('456 South Street');
     cy.get('[data-cy=submit]').click();
-
+  
     cy.wait('@getTrips');
     cy.hash().should('eq', '#/rider');
   });
-})
+});

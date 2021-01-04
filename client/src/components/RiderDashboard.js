@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   Breadcrumb, Col, Row
 } from 'react-bootstrap';
-import { webSocket } from 'rxjs/webSocket';
 import { toast } from 'react-toastify';
 
 import TripCard from './TripCard';
-import { getTrips } from '../services/TripService';
-import { getAccessToken } from '../services/AuthService';
+import { connect, getTrips, messages } from '../services/TripService';
 
 function RiderDashboard (props) {
   const [trips, setTrips] = useState([]);
@@ -25,9 +23,8 @@ function RiderDashboard (props) {
   }, []);
 
   useEffect(() => {
-    const token = getAccessToken();
-    const ws = webSocket(`ws://localhost:8003/taxi/?token=${token}`);
-    const subscription = ws.subscribe((message) => {
+    connect();
+    const subscription = messages.subscribe((message) => {
       setTrips(prevTrips => [
         ...prevTrips.filter(trip => trip.id !== message.data.id),
         message.data
@@ -35,9 +32,11 @@ function RiderDashboard (props) {
       updateToast(message.data);
     });
     return () => {
-      subscription.unsubscribe();
+      if (subscription) {
+        subscription.unsubscribe();
+      }
     }
-  }, []);
+  }, [setTrips]);
 
   const getCurrentTrips = () => {
     return trips.filter(trip => {

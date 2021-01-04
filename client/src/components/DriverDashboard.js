@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {
   Breadcrumb, Col, Row
 } from 'react-bootstrap';
-import { webSocket } from 'rxjs/webSocket';
 import { toast } from 'react-toastify';
 
-import { getAccessToken } from '../services/AuthService';
 import TripCard from './TripCard';
-import { getTrips } from '../services/TripService';
+import { connect, getTrips, messages } from '../services/TripService';
 
 function DriverDashboard (props) {
   const [trips, setTrips] = useState([]);
@@ -25,9 +23,8 @@ function DriverDashboard (props) {
   }, []);
 
   useEffect(() => {
-    const token = getAccessToken();
-    const ws = webSocket(`ws://localhost:8003/taxi/?token=${token}`);
-    const subscription = ws.subscribe((message) => {
+    connect();
+    const subscription = messages.subscribe((message) => {
       setTrips(prevTrips => [
         ...prevTrips.filter(trip => trip.id !== message.data.id),
         message.data
@@ -35,27 +32,29 @@ function DriverDashboard (props) {
       updateToast(message.data);
     });
     return () => {
-      subscription.unsubscribe();
+      if (subscription) {
+        subscription.unsubscribe();
+      }
     }
-  }, []);
+  }, [setTrips]);
 
   const getCurrentTrips = () => {
     return trips.filter(trip => {
       return trip.driver !== null && trip.status !== 'COMPLETED';
     });
-  }
+  };
 
   const getRequestedTrips = () => {
     return trips.filter(trip => {
       return trip.status === 'REQUESTED';
     });
-  }
+  };
 
   const getCompletedTrips = () => {
     return trips.filter(trip => {
       return trip.status === 'COMPLETED';
     });
-  }
+  };
 
   const updateToast = (trip) => {
     if (trip.driver === null) {
