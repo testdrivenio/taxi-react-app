@@ -1,8 +1,7 @@
 import 'cypress-file-upload';
 
 const addUser = (email, firstName, lastName, userType) => {
-  cy.server();
-  cy.route('POST', '**/api/sign_up/**').as('signUp');
+  cy.intercept('POST', 'sign_up').as('signUp');
 
   cy.visit('/#/sign-up');
   cy.get('input#username').type(email);
@@ -17,11 +16,10 @@ const addUser = (email, firstName, lastName, userType) => {
   cy.get('button').contains('Sign up').click();
   cy.wait('@signUp');
   cy.hash().should('eq', '#/log-in');
-}
+};
 
 const logIn = (email) => {
-  cy.server();
-  cy.route('POST', '**/api/log_in/**').as('logIn');
+  cy.intercept('POST', 'log_in').as('logIn');
 
   // Log into the app.
   cy.visit('/#/log-in');
@@ -29,7 +27,7 @@ const logIn = (email) => {
   cy.get('input#password').type('pAssw0rd', { log: false });
   cy.get('button').contains('Log in').click();
   cy.wait('@logIn');
-}
+};
 
 Cypress.Commands.add('addUser', addUser);
 Cypress.Commands.add('logIn', logIn);

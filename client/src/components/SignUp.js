@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Formik } from 'formik';
 import {
   Breadcrumb, Button, Card, Col, Form, Row
@@ -8,6 +8,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 function SignUp (props) {
   const [isSubmitted, setSubmitted] = useState(false);
+
   const onSubmit = async (values, actions) => {
     const url = `${process.env.REACT_APP_BASE_URL}/api/sign_up/`;
     const formData = new FormData();
@@ -29,9 +30,11 @@ function SignUp (props) {
       }
     }
   };
+
   if (isSubmitted) {
     return <Redirect to='/log-in' />
   }
+
   return (
     <Row>
       <Col lg={12}>

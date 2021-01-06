@@ -1,4 +1,3 @@
-import { webSocket } from 'rxjs/webSocket';
 import React, { useEffect, useState } from 'react';
 import {
   Breadcrumb, Button, Card, Col, Row
@@ -6,8 +5,8 @@ import {
 import { LinkContainer } from 'react-router-bootstrap';
 
 import TripMedia from './TripMedia';
-import { getTrip } from '../services/TripService';
-import { getAccessToken, getUser } from '../services/AuthService';
+import { getUser } from '../services/AuthService';
+import { getTrip, updateTrip } from '../services/TripService';
 
 function DriverDetail ({ match }) {
   const [trip, setTrip] = useState(null);
@@ -27,21 +26,16 @@ function DriverDetail ({ match }) {
   const updateTripStatus = (status) => {
     const driver = getUser();
     const updatedTrip = {...trip, driver, status};
-    const token = getAccessToken();
-    const ws = webSocket(`ws://localhost:8003/taxi/?token=${token}`);
-    ws.subscribe();
-    ws.next({
-      type: 'update.trip',
-      data: {
-        ...updatedTrip,
-        driver: updatedTrip.driver.id,
-        rider: updatedTrip.rider.id
-      }
+    updateTrip({
+      ...updatedTrip,
+      driver: updatedTrip.driver.id,
+      rider: updatedTrip.rider.id
     });
     setTrip(updatedTrip);
   };
 
   let tripMedia;
+
   if (trip === null) {
     tripMedia = <>Loading...</>;
   } else {

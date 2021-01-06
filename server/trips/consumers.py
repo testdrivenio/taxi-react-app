@@ -5,7 +5,6 @@ from trips.models import Trip
 from trips.serializers import NestedTripSerializer, TripSerializer
 
 
-
 class TaxiConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def _create_trip(self, data):
@@ -15,7 +14,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def _get_trip_data(self, trip):
-      return NestedTripSerializer(trip).data
+        return NestedTripSerializer(trip).data
 
     @database_sync_to_async
     def _get_trip_ids(self, user):
@@ -94,7 +93,6 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
                     channel=self.channel_name
                 )
 
-            # new
             for trip_id in await self._get_trip_ids(user):
                 await self.channel_layer.group_discard(
                     group=trip_id,

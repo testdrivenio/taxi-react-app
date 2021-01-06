@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 
 from .models import Trip, User
 
+
 @admin.register(User)
 class UserAdmin(DefaultUserAdmin):
     pass
