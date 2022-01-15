@@ -27,3 +27,4 @@ class TripAdmin(admin.ModelAdmin):
     readonly_fields = (
         'id', 'created', 'updated',
     )
+    

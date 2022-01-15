@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Breadcrumb, Col, Row
-} from 'react-bootstrap';
+import { Breadcrumb } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import TripCard from './TripCard';
@@ -18,7 +16,7 @@ function RiderDashboard (props) {
       } else {
         setTrips(response.data);
       }
-    }
+    };
     loadTrips();
   }, []);
 
@@ -35,7 +33,7 @@ function RiderDashboard (props) {
       if (subscription) {
         subscription.unsubscribe();
       }
-    }
+    };
   }, [setTrips]);
 
   const getCurrentTrips = () => {
@@ -55,39 +53,35 @@ function RiderDashboard (props) {
   };
 
   const updateToast = (trip) => {
+    const driverName = `${trip.driver.first_name} ${trip.driver.last_name}`;
     if (trip.status === 'STARTED') {
-      toast.info(`Driver ${trip.driver.username} is coming to pick you up.`);
+      toast.info(`${driverName} is coming to pick you up.`);
     } else if (trip.status === 'IN_PROGRESS') {
-      toast.info(`Driver ${trip.driver.username} is headed to your destination.`);
+      toast.info(`${driverName} is headed to your destination.`);
     } else if (trip.status === 'COMPLETED') {
-      toast.info(`Driver ${trip.driver.username} has dropped you off.`);
+      toast.info(`${driverName} has dropped you off.`);
     }
   };
 
   return (
-    <Row>
-      <Col lg={12}>
-        <Breadcrumb>
-          <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
-          <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
-        </Breadcrumb>
-
-        <TripCard
-          title='Current Trip'
-          trips={getCurrentTrips()}
-          group='rider'
-          otherGroup='driver'
-        />
-
-        <TripCard
-          title='Recent Trips'
-          trips={getCompletedTrips()}
-          group='rider'
-          otherGroup='driver'
-        />
-
-      </Col>
-    </Row>
+    <>
+      <Breadcrumb>
+        <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
+      </Breadcrumb>
+      <TripCard
+        title='Current Trip'
+        trips={getCurrentTrips()}
+        group='rider'
+        otherGroup='driver'
+      />
+      <TripCard
+        title='Recent Trips'
+        trips={getCompletedTrips()}
+        group='rider'
+        otherGroup='driver'
+      />
+    </>
   );
 }
 

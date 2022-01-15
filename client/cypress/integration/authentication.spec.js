@@ -27,7 +27,7 @@ describe('Authentication', function () {
     cy.intercept('POST', 'sign_up', {
       statusCode: 400,
       body: {
-        'username': [
+        username: [
           'A user with that username already exists.'
         ]
       }
@@ -71,7 +71,7 @@ describe('Authentication', function () {
     cy.intercept('POST', 'log_in', {
       statusCode: 400,
       body: {
-        '__all__': [
+        __all__: [
           'Please enter a correct username and password. ' +
           'Note that both fields may be case-sensitive.'
         ]

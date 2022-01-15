@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Breadcrumb, Col, Row
-} from 'react-bootstrap';
+import { Breadcrumb } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 import TripCard from './TripCard';
@@ -18,7 +16,7 @@ function DriverDashboard (props) {
       } else {
         setTrips(response.data);
       }
-    }
+    };
     loadTrips();
   }, []);
 
@@ -35,7 +33,7 @@ function DriverDashboard (props) {
       if (subscription) {
         subscription.unsubscribe();
       }
-    }
+    };
   }, [setTrips]);
 
   const getCurrentTrips = () => {
@@ -57,42 +55,37 @@ function DriverDashboard (props) {
   };
 
   const updateToast = (trip) => {
+    const riderName = `${trip.rider.first_name} ${trip.rider.last_name}`;
     if (trip.driver === null) {
-      toast.info(`Rider ${trip.rider.username} has requested a trip.`);
+      toast.info(`${riderName} has requested a trip.`);
     }
   };
 
   return (
-    <Row>
-      <Col lg={12}>
-        <Breadcrumb>
-          <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
-          <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
-        </Breadcrumb>
-
-        <TripCard
-          title='Current Trip'
-          trips={getCurrentTrips()}
-          group='driver'
-          otherGroup='rider'
-        />
-
-        <TripCard
-          title='Requested Trips'
-          trips={getRequestedTrips()}
-          group='driver'
-          otherGroup='rider'
-        />
-
-        <TripCard
-          title='Recent Trips'
-          trips={getCompletedTrips()}
-          group='driver'
-          otherGroup='rider'
-        />
-
-      </Col>
-    </Row>
+    <>
+      <Breadcrumb>
+        <Breadcrumb.Item href='/'>Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>Dashboard</Breadcrumb.Item>
+      </Breadcrumb>
+      <TripCard
+        title='Current Trip'
+        trips={getCurrentTrips()}
+        group='driver'
+        otherGroup='rider'
+      />
+      <TripCard
+        title='Requested Trips'
+        trips={getRequestedTrips()}
+        group='driver'
+        otherGroup='rider'
+      />
+      <TripCard
+        title='Recent Trips'
+        trips={getCompletedTrips()}
+        group='driver'
+        otherGroup='rider'
+      />
+    </>
   );
 }
 

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Breadcrumb, Card, Col, Row
-} from 'react-bootstrap'
+import { Breadcrumb, Card } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useParams } from 'react-router-dom';
 
 import TripMedia from './TripMedia';
 import { getTrip } from '../services/TripService';
 
 function RiderDetail ({ match }) {
   const [trip, setTrip] = useState(null);
+  const params = useParams();
 
   useEffect(() => {
     const loadTrip = async (id) => {
@@ -18,9 +18,9 @@ function RiderDetail ({ match }) {
       } else {
         setTrip(response.data);
       }
-    }
-    loadTrip(match.params.id);
-  }, [match]);
+    };
+    loadTrip(params.id);
+  }, [params]);
 
   let tripMedia;
 
@@ -32,24 +32,22 @@ function RiderDetail ({ match }) {
         trip={trip}
         otherGroup='driver'
       />
-    )
+    );
   }
 
   return (
-    <Row>
-      <Col lg={12}>
-        <Breadcrumb>
-          <LinkContainer to='/rider'>
-            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-          </LinkContainer>
-          <Breadcrumb.Item active>Trip</Breadcrumb.Item>
-        </Breadcrumb>
-        <Card className='mb-3' data-cy='trip-card'>
-          <Card.Header>Trip</Card.Header>
-          <Card.Body>{tripMedia}</Card.Body>
-        </Card>
-      </Col>
-    </Row>
+    <>
+      <Breadcrumb>
+        <LinkContainer to='/rider'>
+          <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+        </LinkContainer>
+        <Breadcrumb.Item active>Trip</Breadcrumb.Item>
+      </Breadcrumb>
+      <Card className='mb-3' data-cy='trip-card'>
+        <Card.Header>Trip</Card.Header>
+        <Card.Body>{tripMedia}</Card.Body>
+      </Card>
+    </>
   );
 }
 
