@@ -1,6 +1,6 @@
 channels==3.0.4
 channels-redis==3.3.1
-Django==4.0
+Django==4.0.1
 django-cors-headers==3.10.1
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.0.0
