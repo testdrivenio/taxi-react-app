@@ -13,7 +13,6 @@ from rest_framework.test import APITestCase
 from trips.serializers import TripSerializer, UserSerializer
 from trips.models import Trip
 
-
 PASSWORD = 'pAssw0rd!'
 
 
@@ -31,7 +30,6 @@ def create_photo_file():
     Image.new('RGB', (100, 100)).save(data, 'PNG')
     data.seek(0)
     return SimpleUploadedFile('photo.png', data.getvalue())
-
 
 
 class AuthenticationTest(APITestCase):
@@ -102,3 +100,4 @@ class HttpTripTest(APITestCase):
         response = self.client.get(trip.get_absolute_url())
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(str(trip.id), response.data.get('id'))
+        

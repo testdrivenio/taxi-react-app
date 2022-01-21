@@ -7,12 +7,12 @@ import {
   Marker
 } from '@react-google-maps/api';
 
-function Map (props) {
+function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
   const [response, setResponse] = useState(null);
 
   const hasTwoAddresses = (
-    props.pickUpAddress !== '' &&
-    props.dropOffAddress !== ''
+    pickUpAddress !== '' &&
+    dropOffAddress !== ''
   );
 
   const directionsCallback = (response) => {
@@ -27,27 +27,26 @@ function Map (props) {
     >
       <GoogleMap
         center={{
-          lat: props.lat,
-          lng: props.lng
+          lat,
+          lng
         }}
         mapContainerStyle={{
           width: '100%',
           height: '300px',
           marginBottom: '10px'
         }}
-        zoom={props.zoom}
+        zoom={zoom}
       >
         {
           hasTwoAddresses && (
             <DirectionsService
               options={{
-                origin: props.pickUpAddress,
-                destination: props.dropOffAddress,
+                origin: pickUpAddress,
+                destination: dropOffAddress,
                 travelMode: 'DRIVING'
               }}
               callback={directionsCallback}
-            >
-            </DirectionsService>
+            />
           )
         }
         {
@@ -61,14 +60,7 @@ function Map (props) {
         }
         {
           !hasTwoAddresses && (
-            <Marker
-              label='A'
-              position={{
-                lat: props.lat,
-                lng: props.lng
-              }}
-            >
-            </Marker>
+            <Marker label='A' position={{ lat, lng }} />
           )
         }
       </GoogleMap>

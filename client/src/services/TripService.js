@@ -25,15 +25,6 @@ export const createTrip = (trip) => {
   _socket.next(message);
 };
 
-export const updateTrip = (trip) => {
-  connect();
-  const message = {
-    type: 'update.trip',
-    data: trip
-  };
-  _socket.next(message);
-};
-
 export const getTrip = async (id) => {
   const url = `${process.env.REACT_APP_BASE_URL}/api/trip/${id}/`;
   const token = getAccessToken();
@@ -56,4 +47,13 @@ export const getTrips = async () => {
   } catch (response) {
     return { response, isError: true };
   }
+};
+
+export const updateTrip = (trip) => {
+  connect();
+  const message = {
+    type: 'update.trip',
+    data: trip
+  };
+  _socket.next(message);
 };

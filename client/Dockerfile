@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:15.4.0-alpine
+FROM node:16.13-alpine
 
 # set working directory
 WORKDIR /usr/src/app
@@ -9,8 +9,8 @@ ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 # install app dependencies
 COPY package.json .
-COPY package-lock.json .
-RUN npm install --production
+COPY yarn.lock .
+RUN yarn install --production
 
 # copy project
 COPY . .

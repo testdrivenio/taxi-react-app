@@ -8,7 +8,7 @@ function TripCard ({ title, trips, group, otherGroup }) {
   let mediaList;
 
   if (trips.length === 0) {
-    cardBody = <>No trips.</>
+    cardBody = <>No trips.</>;
   } else {
     mediaList = trips.map(trip =>
       <TripMedia
@@ -17,15 +17,15 @@ function TripCard ({ title, trips, group, otherGroup }) {
         otherGroup={otherGroup}
         key={trip.id}
       />
-    )
-    cardBody = <ul className='list-unstyled mb-0'>{mediaList}</ul>
+    );
+    cardBody = mediaList;
   }
   return (
     <Card className='mb-3' data-cy='trip-card'>
       <Card.Header>{title}</Card.Header>
       <Card.Body>{cardBody}</Card.Body>
     </Card>
-  )
+  );
 }
 
 export default TripCard;
