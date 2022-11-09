@@ -7,15 +7,15 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import Driver from './components/Driver.js';
+import Driver from './components/Driver';
 import DriverDashboard from './components/DriverDashboard';
-import DriverDetail from './components/DriverDetail.js';
-import Landing from './components/Landing.js';
+import DriverDetail from './components/DriverDetail';
+import Landing from './components/Landing';
 import LogIn from './components/LogIn';
-import Rider from './components/Rider.js';
-import RiderDashboard from './components/RiderDashboard.js';
-import RiderDetail from './components/RiderDetail.js';
-import RiderRequest from './components/RiderRequest.js';
+import Rider from './components/Rider';
+import RiderDashboard from './components/RiderDashboard';
+import RiderDetail from './components/RiderDetail';
+import RiderRequest from './components/RiderRequest';
 import SignUp from './components/SignUp';
 import { isRider } from './services/AuthService';
 
@@ -36,7 +36,8 @@ function App () {
       );
       setLoggedIn(true);
       return { response, isError: false };
-    } catch (error) {
+    }
+    catch (error) {
       console.error(error);
       return { response: error, isError: true };
     }
@@ -46,7 +47,7 @@ function App () {
     window.localStorage.removeItem('taxi.auth');
     setLoggedIn(false);
   };
-
+  
   return (
     <Routes>
       <Route
@@ -76,7 +77,7 @@ function App () {
         />
         <Route path='rider' element={<Rider />}>
           <Route index element={<RiderDashboard />} />
-          <Route path='request' element={<RiderRequest />} />
+          <Route path='request' element={<RiderRequest />} /> {/* new */}
           <Route path=':id' element={<RiderDetail />} />
         </Route>
         <Route path='driver' element={<Driver />}>

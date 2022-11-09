@@ -60,7 +60,7 @@ function DriverDetail () {
 
   const updateTripStatus = (status) => {
     const driver = getUser();
-    const updatedTrip = { ...trip, driver, status };
+    const updatedTrip = { ...trip, driver, status};
     updateTrip({
       ...updatedTrip,
       driver: updatedTrip.driver.id,

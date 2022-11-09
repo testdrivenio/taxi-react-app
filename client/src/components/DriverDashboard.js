@@ -40,19 +40,19 @@ function DriverDashboard (props) {
     return trips.filter(trip => {
       return trip.driver !== null && trip.status !== 'COMPLETED';
     });
-  };
+  }
 
   const getRequestedTrips = () => {
     return trips.filter(trip => {
       return trip.status === 'REQUESTED';
     });
-  };
+  }
 
   const getCompletedTrips = () => {
     return trips.filter(trip => {
       return trip.status === 'COMPLETED';
     });
-  };
+  }
 
   const updateToast = (trip) => {
     const riderName = `${trip.rider.first_name} ${trip.rider.last_name}`;

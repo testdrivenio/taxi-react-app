@@ -5,7 +5,7 @@ import { isDriver } from '../services/AuthService';
 
 function Driver (props) {
   if (!isDriver()) {
-    return <Navigate to='/' />;
+    return <Navigate to='/' />
   }
 
   return <Outlet />;

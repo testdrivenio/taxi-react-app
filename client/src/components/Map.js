@@ -27,8 +27,8 @@ function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
     >
       <GoogleMap
         center={{
-          lat,
-          lng
+          lat: lat,
+          lng: lng
         }}
         mapContainerStyle={{
           width: '100%',

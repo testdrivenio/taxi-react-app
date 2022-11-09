@@ -23,11 +23,11 @@ services:
 
   taxi-redis:
     container_name: taxi-redis
-    image: redis:6-alpine
+    image: redis:7-alpine
 
   taxi-database:
     container_name: taxi-database
-    image: postgres:14-alpine
+    image: postgres:15-alpine
     environment:
       - POSTGRES_USER=taxi
       - POSTGRES_PASSWORD=taxi
@@ -46,7 +46,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_BASE_URL=http://localhost:8003
-      - REACT_APP_GOOGLE_MAPS_KEY=<YOUR_API_KEY>
+      - REACT_APP_GOOGLE_MAPS_KEY=AIzaSyBw0uqvcSsyWIiAtoGcZEdRbfiGG67e2rE
     ports:
       - 3001:3000
     stdin_open: true

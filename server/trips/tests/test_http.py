@@ -1,17 +1,18 @@
 import base64
-from io import BytesIO
 import json
+from io import BytesIO
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
 from django.core.files.uploadedfile import SimpleUploadedFile
+
 from PIL import Image
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
-from trips.serializers import TripSerializer, UserSerializer
 from trips.models import Trip
+from trips.serializers import TripSerializer, UserSerializer
 
 PASSWORD = 'pAssw0rd!'
 
@@ -42,7 +43,7 @@ class AuthenticationTest(APITestCase):
             'password1': PASSWORD,
             'password2': PASSWORD,
             'group': 'rider',
-            'photo': photo_file,
+            'photo': photo_file, # new
         })
         user = get_user_model().objects.last()
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
@@ -100,4 +101,3 @@ class HttpTripTest(APITestCase):
         response = self.client.get(trip.get_absolute_url())
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual(str(trip.id), response.data.get('id'))
-        

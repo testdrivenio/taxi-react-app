@@ -17,10 +17,10 @@ describe('Authentication', function () {
 
   it('Can log out.', function () {
     cy.logIn(email);
-    cy.get('button').contains('Log out').click().should(() => {
+    cy.get('[data-cy="logOut"]').click().should(() => {
       expect(window.localStorage.getItem('taxi.auth')).to.be.null;
     });
-    cy.get('button').contains('Log out').should('not.exist');
+    cy.get('[data-cy="logOut"]').should('not.exist');
   });
 
   it('Show invalid fields on sign up error.', function () {
@@ -63,8 +63,8 @@ describe('Authentication', function () {
 
   it('Cannot see links when logged in.', function () {
     cy.logIn(email);
-    cy.get('button#signUp').should('not.exist');
-    cy.get('button#logIn').should('not.exist');
+    cy.get('[data-cy="signUp"]').should('not.exist');
+    cy.get('[data-cy="logIn"]').should('not.exist');
   });
 
   it('Shows an alert on login error.', function () {

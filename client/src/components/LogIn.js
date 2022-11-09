@@ -5,12 +5,12 @@ import {
 } from 'react-bootstrap';
 import { Link, Navigate } from 'react-router-dom';
 
-function LogIn ({ isLoggedIn, logIn }) {
+function LogIn (props) {
   const [isSubmitted, setSubmitted] = useState(false);
 
   const onSubmit = async (values, actions) => {
     try {
-      const { response, isError } = await logIn(
+      const { response, isError } = await props.logIn(
         values.username,
         values.password
       );
@@ -22,12 +22,13 @@ function LogIn ({ isLoggedIn, logIn }) {
       } else {
         setSubmitted(true);
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error(error);
     }
-  };
+  }
 
-  if (isLoggedIn || isSubmitted) {
+  if (props.isLoggedIn || isSubmitted) {
     return <Navigate to='/' />;
   }
 

@@ -164,9 +164,9 @@ function SignUp (props) {
                   }
                 </Form.Group>
                 <div className='d-grid mb-3'>
-                  <Button 
+                  <Button
                     disabled={isSubmitting}
-                    type='submit' 
+                    type='submit'
                     variant='primary'
                   >Sign up
                   </Button>

@@ -29,7 +29,7 @@ function TripMedia ({ trip, group, otherGroup }) {
       </div>
       {
         href && (
-          <div className='d-grid'>
+          <div className='d-grid mt-3'>
             <LinkContainer to={href}>
               <Button variant='primary'>Detail</Button>
             </LinkContainer>
