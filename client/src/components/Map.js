@@ -27,13 +27,13 @@ function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
     >
       <GoogleMap
         center={{
-          lat: lat,
-          lng: lng
+          lat,
+          lng,
         }}
         mapContainerStyle={{
           width: '100%',
           height: '300px',
-          marginBottom: '10px'
+          marginBottom: '10px',
         }}
         zoom={zoom}
       >
@@ -43,7 +43,7 @@ function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
               options={{
                 origin: pickUpAddress,
                 destination: dropOffAddress,
-                travelMode: 'DRIVING'
+                travelMode: 'DRIVING',
               }}
               callback={directionsCallback}
             />
@@ -53,7 +53,7 @@ function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
           hasTwoAddresses && response !== null && (
             <DirectionsRenderer
               options={{
-                directions: response
+                directions: response,
               }}
             />
           )

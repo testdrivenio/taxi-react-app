@@ -77,7 +77,7 @@ function App () {
         />
         <Route path='rider' element={<Rider />}>
           <Route index element={<RiderDashboard />} />
-          <Route path='request' element={<RiderRequest />} /> {/* new */}
+          <Route path='request' element={<RiderRequest />} />
           <Route path=':id' element={<RiderDetail />} />
         </Route>
         <Route path='driver' element={<Driver />}>
