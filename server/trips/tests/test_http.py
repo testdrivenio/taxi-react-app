@@ -43,7 +43,7 @@ class AuthenticationTest(APITestCase):
             'password1': PASSWORD,
             'password2': PASSWORD,
             'group': 'rider',
-            'photo': photo_file, # new
+            'photo': photo_file,
         })
         user = get_user_model().objects.last()
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
