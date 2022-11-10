@@ -1,12 +1,13 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
+
 import pytest
 from channels.db import database_sync_to_async
 from channels.layers import get_channel_layer
 from channels.testing import WebsocketCommunicator
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from rest_framework_simplejwt.tokens import AccessToken
 
-from taxi.routing import application
+from taxi.asgi import application
 from trips.models import Trip
 
 TEST_CHANNEL_LAYERS = {

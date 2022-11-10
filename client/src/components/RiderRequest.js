@@ -6,12 +6,14 @@ import {
 import { Navigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import Map from './Map';
 import { getUser } from '../services/AuthService';
 import { createTrip } from '../services/TripService';
 
+import Map from './Map';
+
 function RiderRequest (props) {
   const [isSubmitted, setSubmitted] = useState(false);
+
   const [lat, setLat] = useState(38.897957);
   const [lng, setLng] = useState(-77.036560);
 

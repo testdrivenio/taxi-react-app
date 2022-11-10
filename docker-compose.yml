@@ -23,11 +23,11 @@ services:
 
   taxi-redis:
     container_name: taxi-redis
-    image: redis:6-alpine
+    image: redis:7-alpine
 
   taxi-database:
     container_name: taxi-database
-    image: postgres:14-alpine
+    image: postgres:15-alpine
     environment:
       - POSTGRES_USER=taxi
       - POSTGRES_PASSWORD=taxi

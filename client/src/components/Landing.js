@@ -13,8 +13,12 @@ function Landing (props) {
               <Button data-cy='dashboard'>Dashboard</Button>
             </LinkContainer>
           : <ButtonGroup>
-              <LinkContainer to='/sign-up'><Button>Sign up</Button></LinkContainer>
-              <LinkContainer to='/log-in'><Button>Log in</Button></LinkContainer>
+              <LinkContainer to='/sign-up'>
+                <Button data-cy="signUp">Sign up</Button>
+              </LinkContainer>
+              <LinkContainer to='/log-in'>
+                <Button data-cy="logIn">Log in</Button>
+              </LinkContainer>
             </ButtonGroup>
       }
     </div>

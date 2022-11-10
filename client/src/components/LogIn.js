@@ -22,10 +22,11 @@ function LogIn ({ isLoggedIn, logIn }) {
       } else {
         setSubmitted(true);
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error(error);
     }
-  };
+  }
 
   if (isLoggedIn || isSubmitted) {
     return <Navigate to='/' />;
