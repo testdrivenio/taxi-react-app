@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -49,7 +48,7 @@ class LogInSerializer(TokenObtainPairSerializer):
             if key != 'id':
                 token[key] = value
         return token
-
+    
 
 class TripSerializer(serializers.ModelSerializer):
     class Meta:

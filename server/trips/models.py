@@ -15,24 +15,21 @@ class User(AbstractUser):
         return groups[0].name if groups else None
 
 
-class Trip(models.Model):
-    REQUESTED = 'REQUESTED'
-    STARTED = 'STARTED'
-    IN_PROGRESS = 'IN_PROGRESS'
-    COMPLETED = 'COMPLETED'
-    STATUSES = (
-        (REQUESTED, REQUESTED),
-        (STARTED, STARTED),
-        (IN_PROGRESS, IN_PROGRESS),
-        (COMPLETED, COMPLETED),
-    )
+class TripStatus(models.TextChoices):
+    REQUESTED = 'REQUESTED', 'Requested'
+    STARTED = 'STARTED', 'Started'
+    IN_PROGRESS = 'IN_PROGRESS', 'In progress'
+    COMPLETED = 'COMPLETED', 'Completed'
 
+
+class Trip(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     pick_up_address = models.CharField(max_length=255)
     drop_off_address = models.CharField(max_length=255)
-    status = models.CharField(max_length=20, choices=STATUSES, default=REQUESTED)
+    status = models.CharField(
+        max_length=20, choices=TripStatus, default=TripStatus.REQUESTED)
     driver = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,

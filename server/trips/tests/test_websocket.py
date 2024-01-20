@@ -1,14 +1,13 @@
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
-
 import pytest
 from channels.db import database_sync_to_async
 from channels.layers import get_channel_layer
 from channels.testing import WebsocketCommunicator
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from rest_framework_simplejwt.tokens import AccessToken
 
 from taxi.asgi import application
-from trips.models import Trip
+from trips.models import Trip, TripStatus
 
 TEST_CHANNEL_LAYERS = {
     'default': {
@@ -284,7 +283,7 @@ class TestWebSocket:
                 'id': trip_id,
                 'pick_up_address': trip.pick_up_address,
                 'drop_off_address': trip.drop_off_address,
-                'status': Trip.IN_PROGRESS,
+                'status': TripStatus.IN_PROGRESS,
                 'driver': driver.id,
             },
         }
