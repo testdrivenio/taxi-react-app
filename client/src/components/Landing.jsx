@@ -1,9 +1,10 @@
-import React from 'react';
-import { Button, ButtonGroup } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { isRider } from '../services/AuthService';
+import React from 'react'
+import { Button, ButtonGroup } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
-function Landing (props) {
+import { isRider } from '../services/AuthService.js'
+
+export default function Landing (props) {
   return (
     <div className='middle-center'>
       <h1 className='landing logo'>Taxi</h1>
@@ -22,7 +23,5 @@ function Landing (props) {
             </ButtonGroup>
       }
     </div>
-  );
+  )
 }
-
-export default Landing;
