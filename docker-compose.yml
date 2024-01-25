@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-
   taxi-server:
     build:
       context: ./server
@@ -19,7 +16,7 @@ services:
     ports:
       - 8003:8000
     volumes:
-    - ./server:/usr/src/app
+      - ./server:/usr/src/app
 
   taxi-redis:
     container_name: taxi-redis
@@ -27,7 +24,7 @@ services:
 
   taxi-database:
     container_name: taxi-database
-    image: postgres:15-alpine
+    image: postgres:16-alpine
     environment:
       - POSTGRES_USER=taxi
       - POSTGRES_PASSWORD=taxi
@@ -39,19 +36,17 @@ services:
   taxi-client:
     build:
       context: ./client
-    command: yarn start
+    command: yarn run dev --host
     container_name: taxi-client
     depends_on:
       - taxi-server
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - REACT_APP_BASE_URL=http://localhost:8003
-      - REACT_APP_GOOGLE_MAPS_KEY=<YOUR_API_KEY>
+    # environment:
+    #   - CHOKIDAR_USEPOLLING=true
     ports:
-      - 3001:3000
+      - 5174:5173
     stdin_open: true
-    volumes:
-      - ./client:/usr/src/app
+    # volumes:
+    #   - ./client:/usr/src/app
 
 volumes:
   taxi-database:

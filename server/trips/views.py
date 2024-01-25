@@ -3,7 +3,7 @@ from django.db.models import Q
 from rest_framework import generics, permissions, viewsets
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import Trip
+from .models import Trip, TripStatus
 from .serializers import LogInSerializer, NestedTripSerializer, UserSerializer
 
 
@@ -26,7 +26,7 @@ class TripView(viewsets.ReadOnlyModelViewSet):
         user = self.request.user
         if user.group == 'driver':
             return Trip.objects.filter(
-                Q(status=Trip.REQUESTED) | Q(driver=user)
+                Q(status=TripStatus.REQUESTED) | Q(driver=user)
             )
         if user.group == 'rider':
             return Trip.objects.filter(rider=user)

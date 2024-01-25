@@ -1,41 +1,41 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Formik } from 'formik';
+import React, { useState } from 'react'
+import axios from 'axios'
+import { Formik } from 'formik'
 import {
   Breadcrumb, Button, Card, Form
-} from 'react-bootstrap';
-import { Link, Navigate } from 'react-router-dom';
+} from 'react-bootstrap'
+import { Link, Navigate } from 'react-router-dom'
 
-function SignUp (props) {
-  const [isSubmitted, setSubmitted] = useState(false);
+export default function SignUp (props) {
+  const [isSubmitted, setSubmitted] = useState(false)
 
   const onSubmit = async (values, actions) => {
-    const url = `${process.env.REACT_APP_BASE_URL}/api/sign_up/`;
-    const formData = new FormData();
-    formData.append('username', values.username);
-    formData.append('first_name', values.firstName);
-    formData.append('last_name', values.lastName);
-    formData.append('password1', values.password);
-    formData.append('password2', values.password);
-    formData.append('group', values.group);
-    formData.append('photo', values.photo);
+    const url = `${import.meta.env.VITE_BASE_URL}/api/sign_up/`
+    const formData = new FormData()
+    formData.append('username', values.username)
+    formData.append('first_name', values.firstName)
+    formData.append('last_name', values.lastName)
+    formData.append('password1', values.password)
+    formData.append('password2', values.password)
+    formData.append('group', values.group)
+    formData.append('photo', values.photo)
     try {
-      await axios.post(url, formData);
-      setSubmitted(true);
+      await axios.post(url, formData)
+      setSubmitted(true)
     } catch (response) {
-      const data = response.response.data;
+      const data = response.response.data
       for (const value in data) {
-        actions.setFieldError(value, data[value].join(' '));
+        actions.setFieldError(value, data[value].join(' '))
       }
     }
-  };
+  }
 
   if (props.isLoggedIn) {
-    return <Navigate to='/' />;
+    return <Navigate to='/' />
   }
 
   if (isSubmitted) {
-    return <Navigate to='/log-in' />;
+    return <Navigate to='/log-in' />
   }
 
   return (
@@ -152,7 +152,7 @@ function SignUp (props) {
                     className={'photo' in errors ? 'is-invalid' : ''}
                     name='photo'
                     onChange={event => {
-                      setFieldValue('photo', event.currentTarget.files[0]);
+                      setFieldValue('photo', event.currentTarget.files[0])
                     }}
                     required
                     type='file'
@@ -180,7 +180,5 @@ function SignUp (props) {
         </Card.Body>
       </Card>
     </>
-  );
+  )
 }
-
-export default SignUp;

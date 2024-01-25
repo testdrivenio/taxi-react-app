@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react'
 import {
   DirectionsRenderer,
   DirectionsService,
   GoogleMap,
   LoadScript,
   Marker
-} from '@react-google-maps/api';
+} from '@react-google-maps/api'
 
-function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
-  const [response, setResponse] = useState(null);
+export default function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
+  const [response, setResponse] = useState(0)
 
   const hasTwoAddresses = (
     pickUpAddress !== '' &&
     dropOffAddress !== ''
-  );
+  )
 
   const directionsCallback = (response) => {
     if (response !== null && response.status === 'OK') {
-      setResponse(response);
+      setResponse(response)
     }
-  };
+  }
 
   return (
     <LoadScript
-      googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY}
+      googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_KEY}
     >
       <GoogleMap
         center={{
-          lat,
-          lng,
+          lat: lat,
+          lng: lng
         }}
         mapContainerStyle={{
           width: '100%',
           height: '300px',
-          marginBottom: '10px',
+          marginBottom: '10px'
         }}
         zoom={zoom}
       >
@@ -43,7 +43,7 @@ function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
               options={{
                 origin: pickUpAddress,
                 destination: dropOffAddress,
-                travelMode: 'DRIVING',
+                travelMode: 'DRIVING'
               }}
               callback={directionsCallback}
             />
@@ -53,7 +53,7 @@ function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
           hasTwoAddresses && response !== null && (
             <DirectionsRenderer
               options={{
-                directions: response,
+                directions: response
               }}
             />
           )
@@ -65,7 +65,5 @@ function Map ({ dropOffAddress, lat, lng, pickUpAddress, zoom }) {
         }
       </GoogleMap>
     </LoadScript>
-  );
+  )
 }
-
-export default Map;

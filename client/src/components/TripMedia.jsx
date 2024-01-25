@@ -1,11 +1,11 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import React from 'react'
+import { Button } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
-function TripMedia ({ trip, group, otherGroup }) {
-  const user = trip[otherGroup];
-  const photoUrl = new URL(user.photo, process.env.REACT_APP_BASE_URL).href;
-  const href = group ? `/${group}/${trip.id}` : undefined;
+export default function TripMedia ({ trip, group, otherGroup }) {
+  const user = trip[otherGroup]
+  const photoUrl = new URL(user.photo, import.meta.env.VITE_BASE_URL).href
+  const href = group ? `/${group}/${trip.id}` : undefined
 
   return (
     <div className='mb-3'>
@@ -37,7 +37,5 @@ function TripMedia ({ trip, group, otherGroup }) {
         )
       }
     </div>
-  );
+  )
 }
-
-export default TripMedia;

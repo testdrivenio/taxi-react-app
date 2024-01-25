@@ -1,43 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react'
+import { Formik } from 'formik'
 import {
   Breadcrumb, Button, Card, Form
-} from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+} from 'react-bootstrap'
+import { Navigate } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
 
-import { getUser } from '../services/AuthService';
-import { createTrip } from '../services/TripService';
+import Map from './Map.jsx'
+import { getUser } from '../services/AuthService.js'
+import { createTrip } from '../services/TripService.js'
 
-import Map from './Map';
-
-function RiderRequest (props) {
-  const [isSubmitted, setSubmitted] = useState(false);
-
-  const [lat, setLat] = useState(38.897957);
-  const [lng, setLng] = useState(-77.036560);
+export default function RiderRequest (props) {
+  const [isSubmitted, setSubmitted] = useState(false)
+  const [lat, setLat] = useState(38.897957)
+  const [lng, setLng] = useState(-77.036560)
 
   useEffect(() => {
     if (window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition((position) => {
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-      });
+        setLat(position.coords.latitude)
+        setLng(position.coords.longitude)
+      })
     }
-  }, []);
+  }, [])
 
   const onSubmit = (values, actions) => {
-    const rider = getUser();
+    const rider = getUser()
     createTrip({
       pick_up_address: values.pickUpAddress,
       drop_off_address: values.dropOffAddress,
       rider: rider.id
-    });
-    setSubmitted(true);
-  };
+    })
+    setSubmitted(true)
+  }
 
   if (isSubmitted) {
-    return <Navigate to='/rider' />;
+    return <Navigate to='/rider' />
   }
 
   return (
@@ -111,5 +109,3 @@ function RiderRequest (props) {
     </>
   )
 }
-
-export default RiderRequest;
