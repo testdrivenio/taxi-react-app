@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+db.sqlite3
+.env
+.envrc
+env
+venv
+.pytest_cache/
+.DS_Store
+.dockerignore
